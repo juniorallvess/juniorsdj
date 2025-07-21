@@ -6,6 +6,7 @@
     <title>DJ Pulse - Site Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -335,15 +336,6 @@
                         <p class="text-sm text-gray-300">Recife, Brasil</p>
                     </div>
                 </div>
-
-                <!-- Gallery Item 7 -->
-                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
-                    <img src="img/IMG20244.jpeg" alt="Juniors DJ Show" class="w-full h-64 object-cover">
-                    <div class="p-3 bg-dj-gray">
-                        <h3 class="font-bold">Summer Party</h3>
-                        <p class="text-sm text-gray-300">Recife, Brasil</p>
-                    </div>
-                </div>
             </div>
             
             <div class="mt-12 text-center">
@@ -550,6 +542,11 @@
             });
         });
         
+        // Inicializa o EmailJS
+        (function() {
+            emailjs.init("SEU_USER_ID"); // Substitua com seu User ID do EmailJS
+        })();
+
         // Contact form submission
         const contactForm = document.getElementById('contact-form');
         
@@ -561,13 +558,36 @@
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
+
+            // Mostrar indicador de carregamento
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             
-            // In a real application, you would send this data to a server
-            // For this demo, we'll just show an alert
-            alert(`Obrigado ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
-            
-            // Reset form
-            contactForm.reset();
+            // Enviar email usando EmailJS
+            emailjs.send('default_service', 'template_id', { // Substitua com seu Service ID e Template ID
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: 'contatojuniorsmusic@gmail.com'
+            })
+            .then(function() {
+                // Sucesso
+                alert('Obrigado! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.');
+                contactForm.reset();
+            })
+            .catch(function(error) {
+                // Erro
+                console.error('Erro ao enviar mensagem:', error);
+                alert('Desculpe, ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato através do WhatsApp.');
+            })
+            .finally(function() {
+                // Restaurar botão
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalText;
+            });
         });
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9612648021c1f626',t:'MTc1Mjg0NjA0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
