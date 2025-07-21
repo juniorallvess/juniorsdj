@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Pulse - Site Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dj-green': '#00FF66',
+                        'dj-dark': '#121212',
+                        'dj-gray': '#333333',
+                        'dj-light-gray': '#555555',
+                    },
+                    fontFamily: {
+                        'sans': ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+        
+        body {
+            background-color: #121212;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00FF66;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .music-player {
+            background: linear-gradient(135deg, #333333 0%, #1a1a1a 100%);
+        }
+        
+        .progress-bar {
+            position: relative;
+            height: 4px;
+            background-color: #555555;
+            cursor: pointer;
+            transition: height 0.2s ease;
+        }
+        
+        .progress-bar:hover {
+            height: 6px;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: #00FF66;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #00FF66;
+            margin-top: 8px;
+        }
+        
+        .contact-input {
+            background-color: rgba(85, 85, 85, 0.2);
+            border: 1px solid #555555;
+            transition: border-color 0.3s ease;
+        }
+        
+        .contact-input:focus {
+            border-color: #00FF66;
+            outline: none;
+        }
+        
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #00FF66;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-dj-dark bg-opacity-90 z-50 px-4 py-4 backdrop-blur-sm">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-dj-green">JUNIORS <span class="text-white">DJ</span></a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#inicio" class="nav-link hover:text-dj-green transition-colors">Início</a>
+                <a href="#biografia" class="nav-link hover:text-dj-green transition-colors">Biografia</a>
+                <a href="#musicas" class="nav-link hover:text-dj-green transition-colors">Músicas</a>
+                <a href="#fotos" class="nav-link hover:text-dj-green transition-colors">Fotos</a>
+                <a href="#contato" class="nav-link hover:text-dj-green transition-colors">Contato</a>
+            </div>
+            
+            <button class="md:hidden text-white focus:outline-none" id="menu-toggle">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-dj-dark bg-opacity-95 w-full absolute left-0 py-4 shadow-lg" id="mobile-menu">
+            <div class="container mx-auto flex flex-col space-y-4 px-4">
+                <a href="#inicio" class="hover:text-dj-green transition-colors py-2">Início</a>
+                <a href="#biografia" class="hover:text-dj-green transition-colors py-2">Biografia</a>
+                <a href="#musicas" class="hover:text-dj-green transition-colors py-2">Músicas</a>
+                <a href="#fotos" class="hover:text-dj-green transition-colors py-2">Fotos</a>
+                <a href="#contato" class="hover:text-dj-green transition-colors py-2">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center px-4">
+        <!-- Video Background -->
+        <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+            <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
+            <video
+                class="absolute top-0 left-0 min-w-full min-h-full object-cover"
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23121212'/%3E%3C/svg%3E"
+            >
+                <source src="JRS TP 1.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        </div>
+        
+        <!-- Content -->
+        <div class="container mx-auto text-center relative z-20">
+            <h1 class="text-5xl md:text-7xl font-black mb-4">JUNIORS <span class="text-dj-green">DJ</span></h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Transformando noites em experiências inesquecíveis com batidas que movem multidões</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#musicas" class="bg-dj-green text-dj-dark font-bold py-3 px-8 rounded-full hover:bg-opacity-80 transition-all transform hover:scale-105">OUÇA AGORA</a>
+                <a href="#contato" class="border-2 border-white py-3 px-8 rounded-full hover:border-dj-green hover:text-dj-green transition-all transform hover:scale-105">CONTRATE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section id="biografia" class="py-20 bg-dj-dark px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-heading">BIOGRAFIA</h2>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                <div class="md:w-1/3">
+                    <div class="rounded-lg overflow-hidden border-2 border-dj-green shadow-lg shadow-dj-green/20">
+                        <img src="IMG_9732.jpg" alt="Juniors DJ" class="w-full h-auto object-cover aspect-[4/5]" />
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3">
+                    <h3 class="text-2xl font-bold mb-4 text-dj-green">A História por Trás das Batidas</h3>
+                    <p class="mb-4 text-gray-300">Nascido em Jaboatão dos Guararapes, PE, teve seu primeiro contato com a música tocando guitarra em um grupo da igreja chamado FJU. Anos depois, descobriu os trabalhos de Gui Brazil, Gv3, Look Project e Vintage Culture, o que despertou sua paixão pela música eletrônica. Logo começou a se apresentar como DJ e, em poucos meses, já estava nos palcos de sua cidade. Após um período de aprendizado e produção, Juniorsdj conquistou destaque nos principais shows do estado, sempre trazendo a essência de suas raízes em suas músicas.</p>
+                    <p class="mb-4 text-gray-300">Nascido e criado em Jaboatão dos Guararapes, suas influências musicais vêm de diversos gêneros, desde o techno europeu até o house brasileiro, criando um estilo único que mistura batidas intensas com melodias envolventes.</p>
+                    <p class="mb-6 text-gray-300">Ao longo de sua carreira, Juniorsdj já se apresentou em grandes Eventos, compartilhando o palco com nomes renomados da cena eletrônica e de outros gêneros musicais. Seu compromisso com a inovação e qualidade sonora se tornou o seu diferencial.</p>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-dj-gray px-4 py-2 rounded-full text-sm">House</span>
+                        <span class="bg-dj-gray px-4 py-2 rounded-full text-sm">Techno</span>
+                        <span class="bg-dj-gray px-4 py-2 rounded-full text-sm">EDM</span>
+                        <span class="bg-dj-gray px-4 py-2 rounded-full text-sm">Deep House</span>
+                        <span class="bg-dj-gray px-4 py-2 rounded-full text-sm">Progressive</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section id="musicas" class="py-20 bg-gradient-to-b from-dj-dark to-dj-gray px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-heading">MÚSICAS</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Track 1 -->
+                <div class="music-player rounded-lg p-4 shadow-lg border-2 border-dj-green shadow-lg shadow-dj-green/20">
+                    <h3 class="font-bold text-dj-green mb-3">Firefly - (Juniorsdj Remix)</h3>
+                    <div class="relative pt-[56.25%] w-full">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-lg"
+                            src="https://www.youtube.com/embed/Yjt9N1oxnjY"
+                            title="Firefly - Juniors DJ"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                
+                <!-- Track 2 -->
+                <div class="music-player rounded-lg p-4 shadow-lg border-2 border-dj-green shadow-lg shadow-dj-green/20">
+                    <h3 class="font-bold text-dj-green mb-3">Perfect Day - Juniors dj</h3>
+                    <div class="relative pt-[56.25%] w-full">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-lg"
+                            src="https://www.youtube.com/embed/0J6esdxomP4"
+                            title="Perfect Day - Juniors dj"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                
+                <!-- Track 3 -->
+                <div class="music-player rounded-lg p-4 shadow-lg border-2 border-dj-green shadow-lg shadow-dj-green/20">
+                    <h3 class="font-bold text-dj-green mb-3">Up - (Juniors Remix Bootleg)</h3>
+                    <div class="relative pt-[56.25%] w-full">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-lg"
+                            src="https://www.youtube.com/embed/g78OSd_M_N4"
+                            title="Up - (Juniors Remix Bootleg)"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                
+                <!-- Track 4 -->
+                <div class="music-player rounded-lg p-4 shadow-lg border-2 border-dj-green shadow-lg shadow-dj-green/20">
+                    <h3 class="font-bold text-dj-green mb-3">Md Oliveira - Amanhã (Juniors Remix)</h3>
+                    <div class="relative pt-[56.25%] w-full">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-lg"
+                            src="https://www.youtube.com/embed/eNzxu6qnmEQ"
+                            title="Md Oliveira - Amanhã (Juniors Remix)"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center gap-2 bg-dj-gray hover:bg-dj-light-gray transition-colors py-3 px-6 rounded-full">
+                    <span>Ver todas as músicas</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photos Section -->
+    <section id="fotos" class="py-20 bg-dj-dark px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-heading">FOTOS</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="IMG_9732.jpg" alt="Juniors DJ Performance" class="w-full h-64 object-cover">
+                    <div class="p-3 bg-dj-gray">
+                        <h3 class="font-bold">Festival Eletrônico 2023</h3>
+                        <p class="text-sm text-gray-300">Recife, Brasil</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="IMG_9950.jpg" alt="Juniors DJ Club Show" class="w-full h-64 object-cover">
+                    <div class="p-3 bg-dj-gray">
+                        <h3 class="font-bold">Club Night</h3>
+                        <p class="text-sm text-gray-300">Recife, Brasil</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="IMG_9973.jpg" alt="Juniors DJ Event" class="w-full h-64 object-cover">
+                    <div class="p-3 bg-dj-gray">
+                        <h3 class="font-bold">Summer Beats</h3>
+                        <p class="text-sm text-gray-300">Recife, Brasil</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                    <img src="WhatsApp Image 2025-01-15 at 22.05.27.jpeg" alt="Juniors DJ Live" class="w-full h-64 object-cover">
+                    <div class="p-3 bg-dj-gray">
+                        <h3 class="font-bold">Studio Session</h3>
+                        <p class="text-sm text-gray-300">Recife, Brasil</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center gap-2 bg-dj-gray hover:bg-dj-light-gray transition-colors py-3 px-6 rounded-full">
+                    <span>Ver galeria completa</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-20 bg-gradient-to-b from-dj-gray to-dj-dark px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-heading">CONTATO</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-dj-green">Entre em contato</h3>
+                    <p class="mb-6 text-gray-300">Interessado em contratar o Juniors Dj para seu evento? Preencha o formulário e entraremos em contato o mais breve possível.</p>
+                    
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-dj-green flex items-center justify-center mr-3">
+                                <i class="fas fa-envelope text-dj-dark"></i>
+                            </div>
+                            <span>contatojuniorsmusic@gmail.com ou contatocpmusic@gmail.com</span>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-dj-green flex items-center justify-center mr-3">
+                                <i class="fas fa-phone text-dj-dark"></i>
+                            </div>
+                            <span>+55 (81) 98598-1436</span>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-dj-green flex items-center justify-center mr-3">
+                                <i class="fas fa-map-marker-alt text-dj-dark"></i>
+                            </div>
+                            <span>Recife, PE - Brasil</span>
+                        </div>
+                    </div>
+                    
+                    <h4 class="font-bold mb-3">Siga nas redes sociais</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon w-10 h-10 rounded-full bg-dj-gray flex items-center justify-center">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 rounded-full bg-dj-gray flex items-center justify-center">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 rounded-full bg-dj-gray flex items-center justify-center">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 rounded-full bg-dj-gray flex items-center justify-center">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 rounded-full bg-dj-gray flex items-center justify-center">
+                            <i class="fab fa-soundcloud"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <form id="contact-form" class="bg-dj-gray bg-opacity-30 p-6 rounded-lg shadow-lg">
+                        <div class="mb-4">
+                            <label for="name" class="block mb-2 text-sm font-medium">Nome</label>
+                            <input type="text" id="name" class="contact-input w-full p-3 rounded-md bg-dj-dark text-white" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="email" class="block mb-2 text-sm font-medium">Email</label>
+                            <input type="email" id="email" class="contact-input w-full p-3 rounded-md bg-dj-dark text-white" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="subject" class="block mb-2 text-sm font-medium">Assunto</label>
+                            <select id="subject" class="contact-input w-full p-3 rounded-md bg-dj-dark text-white" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="evento">Contratação para Evento</option>
+                                <option value="parceria">Proposta de Parceria</option>
+                                <option value="imprensa">Imprensa</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block mb-2 text-sm font-medium">Mensagem</label>
+                            <textarea id="message" rows="4" class="contact-input w-full p-3 rounded-md bg-dj-dark text-white" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-dj-green text-dj-dark font-bold py-3 px-6 rounded-md hover:bg-opacity-80 transition-all transform hover:scale-[1.02]">
+                            ENVIAR MENSAGEM
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dj-dark py-8 border-t border-dj-gray px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold text-dj-green">JUNIORS <span class="text-white">DJ</span></a>
+                    <p class="text-gray-400 mt-2">©  JUNIORS DJ. Todos os direitos reservados.</p>
+                    <p class="text-gray-400 mt-2">©  BY CP Products 2018. Todos os direitos reservados.</p>
+
+                </div>
+                
+                <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0">
+                    <a href="#inicio" class="hover:text-dj-green transition-colors">Início</a>
+                    <a href="#biografia" class="hover:text-dj-green transition-colors">Biografia</a>
+                    <a href="#musicas" class="hover:text-dj-green transition-colors">Músicas</a>
+                    <a href="#fotos" class="hover:text-dj-green transition-colors">Fotos</a>
+                    <a href="#contato" class="hover:text-dj-green transition-colors">Contato</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Music player functionality
+        const playButtons = document.querySelectorAll('.play-btn');
+        let currentlyPlaying = null;
+        
+        playButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const trackId = this.getAttribute('data-track');
+                const progressBar = document.getElementById(`progress-${trackId}`);
+                const icon = this.querySelector('i');
+                
+                // If this track is already playing, pause it
+                if (currentlyPlaying === trackId) {
+                    icon.classList.remove('fa-pause');
+                    icon.classList.add('fa-play');
+                    currentlyPlaying = null;
+                    clearInterval(window[`${trackId}Interval`]);
+                    return;
+                }
+                
+                // If another track is playing, stop it
+                if (currentlyPlaying) {
+                    const currentButton = document.querySelector(`[data-track="${currentlyPlaying}"]`);
+                    const currentIcon = currentButton.querySelector('i');
+                    currentIcon.classList.remove('fa-pause');
+                    currentIcon.classList.add('fa-play');
+                    clearInterval(window[`${currentlyPlaying}Interval`]);
+                    document.getElementById(`progress-${currentlyPlaying}`).style.width = '0%';
+                }
+                
+                // Play this track
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                currentlyPlaying = trackId;
+                
+                // Simulate progress
+                let progress = 0;
+                progressBar.style.width = '0%';
+                
+                window[`${trackId}Interval`] = setInterval(() => {
+                    progress += 0.5;
+                    progressBar.style.width = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(window[`${trackId}Interval`]);
+                        icon.classList.remove('fa-pause');
+                        icon.classList.add('fa-play');
+                        currentlyPlaying = null;
+                    }
+                }, 100);
+            });
+        });
+        
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // In a real application, you would send this data to a server
+            // For this demo, we'll just show an alert
+            alert(`Obrigado ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
+            
+            // Reset form
+            contactForm.reset();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9612648021c1f626',t:'MTc1Mjg0NjA0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
